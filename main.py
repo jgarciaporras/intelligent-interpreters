@@ -3,7 +3,7 @@ from flask import request
 from flask import render_template
 import os
 import sys
-sys.path.append('/home/saptarshi/Insync/101365961@georgebrown.ca/Agile Project Management/Final Project/Sprint_1-Flask_App/modules')
+sys.path.append('modules')
 from filename_generator import *
 
 
@@ -21,6 +21,10 @@ def index():
         return render_template('index.html', request="POST")
     else:
         return render_template("index.html")
+
+@app.route('/test_output', methods=['POST', 'GET'])
+def test_output():
+    return render_template('index.html', language = "English", gender = "Male")
 
 
 if __name__ == "__main__":

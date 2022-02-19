@@ -20,5 +20,17 @@
     <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
     <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
     <script src="/static/js/app.js"></script>
+
+    <div id = "predictions">
+    {% if language and  gender %}
+
+    The audio language is: {{ language }}
+
+    The gender of the user is: {{ gender }}
+
+    {% endif %}
+
+  </div>
+
   </body>
 </html>
