@@ -13,7 +13,7 @@ def convert_wav_to_mp3(audio_clip_filename, destination_path):
     return
 
 
-def speech_to_text(mp3_audio_file_name, client_service_key_location):
+def speech_to_text(mp3_audio_file_name, client_service_key_location, language):
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = client_service_key_location
     speech_client = speech.SpeechClient()
     media_file_name = 'audio_clips/converted/' + mp3_audio_file_name + '.mp3'
@@ -26,7 +26,7 @@ def speech_to_text(mp3_audio_file_name, client_service_key_location):
     config_mp3 = speech.RecognitionConfig(
         sample_rate_hertz=48000,
         enable_automatic_punctuation=True,
-        language_code='en-US'
+        language_code= language #'en-US'
     )
 
     # Transcribing the RecognitionAudio objects
@@ -38,6 +38,6 @@ def speech_to_text(mp3_audio_file_name, client_service_key_location):
     transcription = str()
     for result in response_standard_mp3.results:
         transcription.append(result.alternatives[0].transcript)
+        #confidence = result.alternatives[0].confidence
 
-    return transcription
-
+    return transcription #, confidence
