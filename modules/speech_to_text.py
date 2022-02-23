@@ -39,3 +39,5 @@ def speech_to_text(mp3_audio_file_name, client_service_key_location):
     for result in response_standard_mp3.results:
         transcription.append(result.alternatives[0].transcript)
 
+    return transcription
+
