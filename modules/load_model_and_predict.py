@@ -1,21 +1,15 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 import numpy as np
 from tensorflow.keras.models import load_model
 
 
-def audio_model(model_folder):
-    # loads model from the model folder
-    model = load_model(model_folder, compile = True)
+# loads model from the model directory
+def audio_model(model_directory):
+    model = load_model(model_directory, compile = True)
     
     return model
 
 
-def predict_sample(file_name):
+def predict_sample(file_name, model):
     # load features for sample audio
     sample_audio = np.load(file_name+'.npy')
 

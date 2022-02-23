@@ -3,16 +3,19 @@ import os
 from google.cloud import speech
 
 
-def convert_wav_to_mp3(audio_clip_filename, destination_path):
-    wav_file = audio_clip_filename + ".wav"
+# Convertes a .wav file to .mp3
+# This is done because it reduces the file size and also performance with Google Cloud Speech to Text API is much faster
+def convert_wav_to_mp3(audio_clip_filename, wav_file_path, destination_path):
+    wav_file = wav_file_path + audio_clip_filename + ".wav"
     sound = pydub.AudioSegment.from_wav(wav_file)
-    filename = audio_clip_filename.split(".")[0]
-    mp3_fillename = destination_path + filename + ".mp3"
-    sound.export(mp3_fillename, format="mp3")
+    #filename = audio_clip_filename.split(".")[0]
+    mp3_filename = destination_path + audio_clip_filename + ".mp3"
+    sound.export(mp3_filename, format="mp3")
     print("File Converted Successfully")
     return
 
 
+# Passes an MP3 file to Google Cloud Speech to Text API and receives the transcription
 def speech_to_text(mp3_audio_file_name, client_service_key_location, language):
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = client_service_key_location
     speech_client = speech.SpeechClient()
