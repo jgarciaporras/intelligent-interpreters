@@ -11,7 +11,7 @@ def audio_model(model_directory):
 
 def predict_sample(file_name, model):
     # load features for sample audio
-    sample_audio = np.load(file_name+'.npy')
+    sample_audio = np.load(file_name)
 
     # get model prediction
     predictions = model.predict(sample_audio)

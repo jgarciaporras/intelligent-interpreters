@@ -33,7 +33,11 @@ def index():
 
         # Preprocess audio
         audio_features = preprocess_audio.preprocess_sample(filename)
+        print("Processed Audio Successfully")
 
+        features_file = 'audio_clips/processed/' + filename + '.npy'
+        prediction = load_model_and_predict.predict_sample(features_file, model)
+        print(prediction)
         return render_template('index.html', request="POST")
     else:
         return render_template("index.html")
