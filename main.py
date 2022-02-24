@@ -7,7 +7,7 @@ sys.path.append('modules')
 import filename_generator
 import speech_to_text
 import load_model_and_predict
-
+import preprocess_audio
 
 app = Flask(__name__, template_folder='templates')
 
@@ -31,6 +31,8 @@ def index():
         mp3_destination_path = 'audio_clips/converted/'
         mp3_filename = speech_to_text.convert_wav_to_mp3(filename, wav_file_path, mp3_destination_path)
 
+        # Preprocess audio
+        audio_features = preprocess_audio.preprocess_sample(filename)
 
         return render_template('index.html', request="POST")
     else:

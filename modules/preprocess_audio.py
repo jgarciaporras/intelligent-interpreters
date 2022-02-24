@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[10]:
-
-
 import numpy as np
 import librosa
 from sklearn.preprocessing import StandardScaler
@@ -13,7 +7,8 @@ def preprocess_sample(file_name):
     # load sample audio
     time_series_sample = []
     num_samples_sample = []
-    data, samplerate = librosa.load(file_name+".wav")
+    audio_file = 'audio_clips/' + file_name + '.wav'
+    data, samplerate = librosa.load(audio_file)
     time_series_sample.append(data)
     num_samples_sample.append(samplerate)
         
@@ -32,7 +27,7 @@ def preprocess_sample(file_name):
     mfcc_delta2_sample = np.array(mfcc_delta2_sample)
     
     # saves features into npy file
-    save_features = np.save(file_name+'.npy', mfcc_delta2_sample)
+    save_features = np.save('audio_clips/processed/' + file_name + '.npy', mfcc_delta2_sample)
     
     # returns file with features of sample audio
     return save_features
