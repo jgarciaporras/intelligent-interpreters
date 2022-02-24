@@ -4,21 +4,23 @@ from flask import render_template
 import os
 import sys
 sys.path.append('modules')
-from filename_generator import *
+import filename_generator
 import speech_to_text
+import load_model_and_predict
+
 
 app = Flask(__name__, template_folder='templates')
 
 # Load the NN model for prediction
 model_directory = 'model/model1/'
-model = audio_model(model_directory)
+model = load_model_and_predict.audio_model(model_directory)
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == "POST":
         f = request.files['audio_data']
         # Generate filename and store on server
-        filename = generate_filename()
+        filename = filename_generator.generate_filename()
         file_path = "audio_clips/" + filename + '.wav'
         with open(file_path, 'wb') as audio:
             f.save(audio)
@@ -27,7 +29,7 @@ def index():
         # Convert .wav file to mp3
         wav_file_path = 'audio_clips/'
         mp3_destination_path = 'audio_clips/converted/'
-        speech_to_text.convert_wav_to_mp3(filename, wav_file_path, mp3_destination_path)
+        mp3_filename = speech_to_text.convert_wav_to_mp3(filename, wav_file_path, mp3_destination_path)
 
 
         return render_template('index.html', request="POST")

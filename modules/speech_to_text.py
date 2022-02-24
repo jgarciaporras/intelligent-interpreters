@@ -12,7 +12,7 @@ def convert_wav_to_mp3(audio_clip_filename, wav_file_path, destination_path):
     mp3_filename = destination_path + audio_clip_filename + ".mp3"
     sound.export(mp3_filename, format="mp3")
     print("File Converted Successfully")
-    return
+    return mp3_filename
 
 
 # Passes an MP3 file to Google Cloud Speech to Text API and receives the transcription
