@@ -5,32 +5,62 @@
     <title>Audio Recorder</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
+  <style>
+    .header {text-align: center; padding: 30px 30px 30x 30px; font-size: 40px;}
+    .recording {text-align: center; padding: 20px 20px 20x 20px; font-size: 30px;}
+    .recordingfile {text-align: center; padding: 15px 15px 15x 15px; font-size: 25px;}
+    .recordingpred {text-align: center; padding: 15px 15px 15x 15px; font-size: 30px;}
+    .recordingtranscript {text-align: center; padding: 15px 15px 15x 15px; font-size: 30px;}
+    body {background-image: url('https://media.istockphoto.com/photos/dotted-grid-paper-background-texture-seamless-repeat-pattern-picture-id1320330053?b=1&k=20&m=1320330053&s=170667a&w=0&h=XisfN35UnuxAVP_sjq3ujbFDyWPurSfSTYd-Ll09Ncc=');}
+  </style>
   <body>
-    <h1 align="center">Language and Gender Detector Demo</h1>
-
-    <div id="controls">
-     <button id="recordButton">Record</button>
-     <button id="pauseButton" disabled>Pause</button>
-     <button id="stopButton" disabled>Stop</button>
-     <progress value="0" max="10" id="countdownTimer"></progress>
+    <div class="header">
+        <h1 align="center">Intelligent Interpreters</h1>
     </div>
-    <div id="formats">Format: start recording to see sample rate</div>
-    <p><strong>Recordings:</strong></p>
-    <ol id="recordingsList"></ol>
-    <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
-    <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
-    <script src="/static/js/app.js"></script>
 
-    <div id = "predictions">
-    {% if language and  gender %}
+    <div class="recording">
+        <p><strong>1. Record audio for 10 seconds</strong></p>
+        <div id="controls">
+         <button id="recordButton" style="height:45px; width:80px; font-size:20px">Record</button>
+         <button id="pauseButton" disabled>Pause</button>
+         <button id="stopButton" disabled>Stop</button>
+         <progress value="0" max="10" id="countdownTimer"></progress>
+        </div>
+    </div>
 
-    The audio language is: {{ language }}
+    <div class="recordingfile">
+        <div id="formats">Format: start recording to see sample rate</div>
+        <p><strong>Recordings:</strong></p>
+        <p style="font-size:30px"><strong> 2. Click Upload </strong></p>
+        <ol id="recordingsList"></ol>
+        <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
+        <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+        <script src="/static/js/app.js"></script>
+    </div>
 
-    The gender of the user is: {{ gender }}
+    <div class="recordingpred">
+        <div id="predictions">
 
-    {% endif %}
+        <form method="post" action="/predict">
+        <p><strong>3. Get Prediction</strong></p>
+            <input type="submit" value="Predict" name="predictaction" style="height:70px; width:120px; font-size:24px"/>
+        </form>
 
-  </div>
+        {% if prediction %}
+            <p class = "text-center"> Prediction is =>  {{prediction}}</p>
+        {% endif %}
 
+        {% if transcription %}
+            <p class = "text-center" style="color:blue">  Transcription is =>  {{transcription}}</p>
+        {% endif %}
+
+        {% if translation %}
+            <p class = "text-center" style="color:green">  Translation in English is =>  {{translation}}</p>
+        
+        {% endif %}
+        
+        </div>
+    </div>
+    
   </body>
 </html>

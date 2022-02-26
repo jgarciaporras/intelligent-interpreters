@@ -27,7 +27,7 @@ def preprocess_sample(file_name):
     mfcc_delta2_sample = np.array(mfcc_delta2_sample)
     
     # saves features into npy file
-    save_features = np.save('audio_clips/processed/' + file_name + '.npy', mfcc_delta2_sample)
+    save_features = np.save(file_name, mfcc_delta2_sample)
     
     # returns file with features of sample audio
     return save_features
