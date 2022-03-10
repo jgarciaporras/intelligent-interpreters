@@ -1,3 +1,5 @@
+# This module includes function for integrating Google's Translator API
+
 from googletrans import Translator
 
 

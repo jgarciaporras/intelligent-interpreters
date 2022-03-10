@@ -1,3 +1,4 @@
+# This module contains functions that generates a random string that can be used to create a filename
 import string
 import random
 

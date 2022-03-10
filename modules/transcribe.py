@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Feb 24 00:54:15 2022
-
-@author: jocai
-"""
+# This module includes functions for integrating Google's Speech Recognition API
 
 import speech_recognition as sr
 

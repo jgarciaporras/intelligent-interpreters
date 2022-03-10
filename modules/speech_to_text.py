@@ -1,3 +1,6 @@
+# This module contains functions for converting the input wav file to mp3, as well as includes functions for integration with Google's Speech to Text API for
+# transcribing audio to text
+
 import pydub
 import os
 from google.cloud import speech

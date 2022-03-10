@@ -1,3 +1,5 @@
+# This module contains functions that loads the Neural Network model and predicts audio samples for gender and language
+
 import numpy as np
 from tensorflow.keras.models import load_model
 

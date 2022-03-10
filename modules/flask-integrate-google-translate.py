@@ -1,12 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Feb 22 19:56:38 2022
-
-@author: jocai
-"""
-
-
-@app.route("/", methods=["POST"])
+#@app.route("/", methods=["POST"])
 def translator():
     if request.method == "POST":
         
@@ -22,7 +14,7 @@ def translator():
     return render_template("index.html", language=language, transcription=transcription, translation=translation)
 
 
-@app.route("/")
+#@app.route("/")
 def index():
     lang = [{"name":"English", "language":"en"}, {"name":"Spanish", "language":"es"}, 
             {"name":"German", "language":"de"}, {"name":"Korean", "language":"kr"}, 

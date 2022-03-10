@@ -8,9 +8,9 @@ import filename_generator
 import speech_to_text
 import load_model_and_predict
 import preprocess_audio
+import transcribe
+import translate
 
-from transcribe import *
-from translate import *
 
 app = Flask(__name__, template_folder='templates')
 
@@ -40,40 +40,38 @@ def index():
         mp3_filename = speech_to_text.convert_wav_to_mp3(filename, wav_file_path, mp3_destination_path)
 
         # Preprocess audio
-        audio_features = preprocess_audio.preprocess_sample(features_file)
+        audio_features = preprocess_audio.preprocess_sample(filename, features_file)
         print("Processed Audio Successfully")
         
         return render_template('index.html', request="POST")
     else:
         return render_template("index.html")
-    
+
     
 @app.route('/predict', methods=['POST', 'GET'])
 def predict():
     if request.method == "POST":
         if request.form.get('predictaction') == 'Predict':
             
-            prediction = load_model_and_predict.predict_sample(features_file, model)
+            prediction = load_model_and_predict.predict_sample(os.path.join(app.root_path, features_file), model)
             
             #language of transcription
-            language = get_audio_language(prediction)
+            language = transcribe.get_audio_language(prediction)
             
             #transcribe audio
-            transcription = transcribe("audio_clips/" + filename + '.wav', language)    
+            transcription = transcribe.transcribe("audio_clips/" + filename + '.wav', language)    
             
             
             #translation language
-            source = get_source_language(language)
+            source = translate.get_source_language(language)
             
             target = 'en'
             
             #translate audio
-            google_translate = translate(transcription, source, target)
+            google_translate = translate.translate(transcription, source, target)
             translation = google_translate.text
             
     return render_template('index.html', prediction=prediction, transcription=transcription, translation=translation)
-
-   
 
 
 if __name__ == "__main__":
